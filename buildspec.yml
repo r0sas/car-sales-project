@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - pip install -r requirements.txt
+  build:
+    commands:
+      - echo "Running Glue script validations"
+      - pytest tests/  # optional tests
+      - zip -r lambda_package.zip lambda_function.py
+artifacts:
+  files:
+    - lambda_package.zip
+    - glue_scripts/*
